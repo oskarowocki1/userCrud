@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>User List</h1>
+    <main>
+        <button id="addBtn" onclick="openCreateUserModal()">dodaj</button>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Website</th>
+                    <th>Action</th> <!-- Add a new column for "View" buttons -->
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+
+    <div id="createUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCreateUserModal()">&times;</span>
+            <h2>Create a New User</h2>
+            <form id="userForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <br>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" required>
+                <br>
+                <input id="submit" type="submit" value="Create User">
+            </form>
+        </div>
+    </div>
+    
+    <div id="viewUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>User Details</h2>
+            <div id="userDetails"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

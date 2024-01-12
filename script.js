@@ -28,6 +28,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     openModal(user);
                 };
                 cell6.appendChild(viewButton);
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.onclick = function () {
+                    openModal(user);//zamienic na edit
+                };
+                cell6.appendChild(editButton);
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = function () {
+                    openModal(user);
+                };
+                cell6.appendChild(deleteButton);
             });
         })
         .catch(error => {

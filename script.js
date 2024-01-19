@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const userTable = document.getElementById("userTable").getElementsByTagName('tbody')[0];
+    // const userTable = document.getElementById("userTable").getElementsByTagName('tbody')[0];
+    const userTable = $("#userTable tbody");
 
     // Fetch user data from the API
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -7,44 +8,27 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             // Loop through the user data and create table rows with "View" buttons
             data.forEach(user => {
-                const row = userTable.insertRow();
-                const cell1 = row.insertCell(0);
-                const cell2 = row.insertCell(1);
-                const cell3 = row.insertCell(2);
-                const cell4 = row.insertCell(3);
-                const cell5 = row.insertCell(4);
-                const cell6 = row.insertCell(5); // Add a new cell for the "View" button
+                // const row = userTable.insertRow();
+                const row = $("<tr>");
+                row.append($("<td>").text(user.id));
+                row.append($("<td>").text(user.name));
+                row.append($("<td>").text(user.email));
+                row.append($("<td>").text(user.phone));
+                row.append($("<td>").text(user.website));
+                
+                const buttonCell = $("<td>");
+                buttonCell.append($("<button>").text("View").click(function () { openModal(user); }))
+                buttonCell.append($("<button>").text("Edit").click(function () { openModal(user); }))
+                buttonCell.append($("<button>").text("Delete").click(function () { openModal(user); }))
+                row.append(buttonCell);
 
-                cell1.innerHTML = user.id;
-                cell2.innerHTML = user.name;
-                cell3.innerHTML = user.email;
-                cell4.innerHTML = user.phone;
-                cell5.innerHTML = user.website;
-
-                // Create a "View" button and attach a click event handler
-                const viewButton = document.createElement("button");
-                viewButton.textContent = "View";
-                viewButton.onclick = function () {
-                    openModal(user);
-                };
-                cell6.appendChild(viewButton);
-                const editButton = document.createElement("button");
-                editButton.textContent = "Edit";
-                editButton.onclick = function () {
-                    openModal(user);//zamienic na edit
-                };
-                cell6.appendChild(editButton);
-                const deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
-                deleteButton.onclick = function () {
-                    openModal(user);
-                };
-                cell6.appendChild(deleteButton);
+                userTable.append(row);
             });
         })
         .catch(error => {
             console.error("Error fetching user data:", error);
         });
+
 });
 
 // Function to open the modal and fetch user details
